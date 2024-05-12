@@ -11,18 +11,27 @@
   <h2>Customer Details</h2>
   <ion-item>
     <ion-label>Name</ion-label>
-    <ion-input [(ngModel)]="customer.name" disabled></ion-input>
+    <ion-input [(ngModel)]="customer.name" [disabled]="!isEditing"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Phone</ion-label>
-    <ion-input [(ngModel)]="customer.phoneNumber" disabled></ion-input>
+    <ion-input [(ngModel)]="customer.phoneNumber" [disabled]="!isEditing"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Email</ion-label>
-    <ion-input [(ngModel)]="customer.email" disabled></ion-input>
+    <ion-input [(ngModel)]="customer.email" [disabled]="!isEditing"></ion-input>
   </ion-item>
-  <ion-button expand="block" (click)="editCustomerDetails()">Edit Details</ion-button>
-
+  <ion-button expand="block" (click)="editCustomerDetails()">
+    {{ isEditing ? 'Cancel' : 'Edit Details' }}
+  </ion-button>
+  <ion-button expand="block" (click)="saveCustomerDetails()" *ngIf="isEditing">
+    Save
+  </ion-button>
+  <!--Manage address-->
+  <div class="address-management">
+    <button class="edit-button"><ion-icon name="create"></ion-icon></button>
+    <span class="address-label bigger-text">Manage Address</span>
+  </div>
   <!-- Past Orders -->
   <h2>Past Orders</h2>
   <ion-list>
@@ -30,10 +39,19 @@
       <ion-label>
         <h3>{{ order.restaurantName }}</h3>
         <p>Total Amount: ${{ totalAmounts[i] }}</p>
+        <!-- Hardcoded 'Delivered' and tick sign -->
+        <p>Delivered <ion-icon name="checkmark-circle-outline"></ion-icon></p>
       </ion-label>
-      <ion-button slot="end" (click)="reorder(order)">Reorder</ion-button>
+      <!-- Reorder Button -->
+      <ion-button slot="end" (click)="reorder(order)" color="secondary">
+        Reorder
+      </ion-button>
     </ion-item>
   </ion-list>
+  <!-- Get Help Button -->
+  <ion-button expand="block" (click)="showHelpAlert()" color="primary">
+    <ion-icon name="help-circle"></ion-icon> Get Help
+  </ion-button>
 </ion-content>
 
 <!-- Navigation to Tabs -->

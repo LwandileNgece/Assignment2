@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-account',
@@ -14,8 +14,12 @@ export class AccountPage {
   };
   pastOrders: any[] = [];
   totalAmounts: any[] = [];
+  isEditing: boolean = false; // Flag to track editing mode
 
-  constructor(private navController: NavController) {}
+  constructor(
+    private navController: NavController,
+    private alertController: AlertController
+  ) {}
 
   ionViewWillEnter() {
     this.loadPastOrders();
@@ -37,8 +41,14 @@ export class AccountPage {
   }
 
   editCustomerDetails() {
-    // Implement logic for editing customer details
-    console.log('Editing customer details');
+    // Toggle editing mode
+    this.isEditing = !this.isEditing;
+  }
+
+  saveCustomerDetails() {
+    // Save customer details to localStorage or perform any other actions needed
+    // For demonstration purposes, let's just toggle editing mode
+    this.isEditing = !this.isEditing;
   }
 
   reorder(order: any) {
@@ -48,5 +58,14 @@ export class AccountPage {
 
   goToCart() {
     this.navController.navigateForward(['/cart']);
+  }
+
+  async showHelpAlert() {
+    const alert = await this.alertController.create({
+      header: 'Get Help',
+      message: 'Please contact support for assistance.',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }
