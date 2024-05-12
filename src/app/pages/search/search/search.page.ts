@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -10,7 +11,7 @@ export class SearchPage {
   allRestaurants: any[] = []; // Holds all restaurants retrieved from local storage
   filteredRestaurants: any[] = []; // Holds the filtered restaurants based on search criteria
 
-  constructor() {
+  constructor(private router: Router) {
     // Retrieve restaurants data from local storage
     const restaurantsData = localStorage.getItem('restaurants');
     if (restaurantsData) {
@@ -39,7 +40,7 @@ export class SearchPage {
     }
   }
 
-  // Method to add the selected restaurant to the cart
+  // Method to add the selected restaurant to the cart and navigate to the cart page
   addToCart(restaurant: any) {
     // Create an order and store it in local storage
     const order = {
@@ -57,5 +58,8 @@ export class SearchPage {
     orders.push(order);
     // Save the updated orders back to local storage
     localStorage.setItem('orders', JSON.stringify(orders));
+
+    // Navigate to the cart page
+    this.router.navigate(['/cart']);
   }
 }

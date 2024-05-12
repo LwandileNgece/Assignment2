@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -10,8 +9,7 @@ import { Router } from '@angular/router';
 export class HomePage {
   restaurants: any[]; // Define an array to store restaurant data
 
-  constructor() {
-    
+  constructor(private router: Router) {
     // Initialize restaurant data (you can fetch it from an API or hardcode it)
     this.restaurants = [
       {
@@ -71,5 +69,8 @@ export class HomePage {
     orders.push(order);
     // Save the updated orders back to local storage
     localStorage.setItem('orders', JSON.stringify(orders));
+
+    // Navigate to the cart page
+    this.router.navigate(['/cart']);
   }
 }
