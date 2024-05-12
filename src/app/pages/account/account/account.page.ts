@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -15,10 +16,12 @@ export class AccountPage {
   pastOrders: any[] = [];
   totalAmounts: any[] = [];
   isEditing: boolean = false; // Flag to track editing mode
+  selectedRestaurant: any; // Add this property
 
   constructor(
     private navController: NavController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) {}
 
   ionViewWillEnter() {
@@ -52,8 +55,14 @@ export class AccountPage {
   }
 
   reorder(order: any) {
-    // Implement logic for reordering previous orders
-    console.log('Reordering:', order);
+    // Pass both the order and restaurant information to the cart page
+    const navigationExtras: NavigationExtras = {
+      state: {
+        order: order,
+        restaurant: this.selectedRestaurant
+      }
+    };
+    this.router.navigate(['/cart'], navigationExtras);
   }
 
   goToCart() {

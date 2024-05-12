@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -12,12 +12,24 @@ export class CartPage {
   deliveryInstructions: string = ''; // Variable to store delivery instructions
   selectedRestaurant: any; // Variable to store the selected restaurant
 
-  constructor(private router: Router, private alertController: AlertController) {
+  constructor(
+    private router: Router,
+    private alertController: AlertController,
+    private route: ActivatedRoute
+  ) {
     // Fetch orders from local storage
     const storedOrders = localStorage.getItem('orders');
     if (storedOrders !== null) {
       this.orders = JSON.parse(storedOrders);
     }
+
+    // Retrieve order information from navigation extras
+  const navigation = this.router.getCurrentNavigation();
+  if (navigation && navigation.extras.state) {
+    const state = navigation.extras.state;
+    this.selectedRestaurant = state['restaurant'];
+    this.orders.push(state['order']);
+  }
   }
 
   // Method to calculate total price without delivery fee
