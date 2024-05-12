@@ -36,36 +36,62 @@ export class CartPage {
 
   // Method to handle payment
   async makePayment() {
-  // Calculate the total order amount
-  const totalAmount = this.calculateTotal();
+    // Calculate the total order amount
+    const totalAmount = this.calculateTotal();
 
-  // Show a pop-up message indicating that payment was successful
-  const alert = await this.alertController.create({
-    header: 'Payment Successful',
-    message: 'Your payment was successful!',
-    buttons: ['OK']
-  });
+    // Show a pop-up message indicating that payment was successful
+    const alert = await this.alertController.create({
+      header: 'Payment Successful',
+      message: 'Your payment was successful!',
+      buttons: ['OK']
+    });
 
-  await alert.present();
+    await alert.present();
 
-  // Store the selected restaurant in local storage
-  localStorage.setItem('selectedRestaurant', JSON.stringify(this.selectedRestaurant));
+    // Store the selected restaurant in local storage
+    localStorage.setItem('selectedRestaurant', JSON.stringify(this.selectedRestaurant));
 
-  // Store the order total in local storage
-  localStorage.setItem('orderTotal', totalAmount.toString());
+    // Store the order total in local storage
+    localStorage.setItem('orderTotal', totalAmount.toString());
 
-  // Store the order in local storage
-  this.storeOrderInLocalStorage();
-}
+    // Store the order and its total amount in local storage
+    this.storeOrderInLocalStorage(totalAmount);
 
-  // Method to store the order in local storage
-  storeOrderInLocalStorage() {
-    // Store the orders array in local storage
-    localStorage.setItem('orderHistory', JSON.stringify(this.orders));
+    // Clear the cart
+    this.clearCart();
+
+    // Navigate to the account page
+    this.router.navigate(['/account']);
   }
 
-  // Method to navigate to the Home page
-  goToHome() {
-    this.router.navigate(['/home']);
+  // Method to store the order and its total amount in local storage
+  storeOrderInLocalStorage(totalAmount: number) {
+    // Retrieve existing order history and total amounts from local storage
+    let orderHistory: any[] = [];
+    let totalAmounts: any[] = [];
+    const storedOrderHistory = localStorage.getItem('orderHistory');
+    const storedTotalAmounts = localStorage.getItem('totalAmounts');
+    if (storedOrderHistory) {
+      orderHistory = JSON.parse(storedOrderHistory);
+    }
+    if (storedTotalAmounts) {
+      totalAmounts = JSON.parse(storedTotalAmounts);
+    }
+
+    // Add the current order to the order history
+    orderHistory.push(...this.orders);
+
+    // Add the total amount to the total amounts array
+    totalAmounts.push(totalAmount);
+
+    // Store the updated order history and total amounts in local storage
+    localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+    localStorage.setItem('totalAmounts', JSON.stringify(totalAmounts));
+  }
+
+  // Method to clear the cart
+  clearCart() {
+    localStorage.removeItem('orders');
+    this.orders = [];
   }
 }

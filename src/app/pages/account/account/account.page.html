@@ -26,15 +26,17 @@
   <!-- Past Orders -->
   <h2>Past Orders</h2>
   <ion-list>
-    <ion-item *ngFor="let order of pastOrders">
+    <ion-item *ngFor="let order of pastOrders; let i = index">
       <ion-label>
         <h3>{{ order.restaurantName }}</h3>
-        <p>Total Amount: ${{ orderTotal }}</p>
+        <p>Total Amount: ${{ totalAmounts[i] }}</p>
       </ion-label>
       <ion-button slot="end" (click)="reorder(order)">Reorder</ion-button>
     </ion-item>
   </ion-list>
-  <!-- Navigation to Tabs -->
+</ion-content>
+
+<!-- Navigation to Tabs -->
 <ion-footer>
   <ion-toolbar>
     <div class="tab-buttons-container">
@@ -64,4 +66,3 @@
     </div>
   </ion-toolbar>
 </ion-footer>
-</ion-content>

@@ -13,13 +13,13 @@ export class AccountPage {
     email: 'ngecelwandile@gmail.com'
   };
   pastOrders: any[] = [];
-  orderTotal: number = 0;
+  totalAmounts: any[] = [];
 
   constructor(private navController: NavController) {}
 
   ionViewWillEnter() {
     this.loadPastOrders();
-    this.loadOrderTotal();
+    this.loadTotalAmounts();
   }
 
   loadPastOrders() {
@@ -29,10 +29,10 @@ export class AccountPage {
     }
   }
 
-  loadOrderTotal() {
-    const storedOrderTotal = localStorage.getItem('orderTotal');
-    if (storedOrderTotal) {
-      this.orderTotal = parseFloat(storedOrderTotal);
+  loadTotalAmounts() {
+    const storedTotalAmounts = localStorage.getItem('totalAmounts');
+    if (storedTotalAmounts) {
+      this.totalAmounts = JSON.parse(storedTotalAmounts);
     }
   }
 
