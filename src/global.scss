@@ -50,4 +50,29 @@ ion-tab-button.active {
     align-items: flex-end; /* Align items at the bottom */
     height: 100%; /* Fill the height of the toolbar */
   }
+  .active-tab {
+    color: red; // Change the color to red for the active tab
+  }
+  .delivery-details {
+    padding: 20px;
+  }
+  
+  .delivery-details h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .delivery-address {
+    display: flex;
+    align-items: center;
+  }
+  
+  .delivery-address p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .change-button {
+    text-decoration: underline;
+  }
   

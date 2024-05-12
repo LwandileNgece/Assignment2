@@ -1,0 +1,90 @@
+<!-- cart.page.html -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Cart
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Display orders -->
+  <ion-list>
+    <ion-item *ngFor="let order of orders">
+      <ion-label>{{ order.restaurantName }} - {{ order.dish }}</ion-label>
+      <ion-label slot="end">${{ order.price }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Delivery instructions -->
+  <ion-item>
+    <ion-label position="stacked">Delivery Instructions</ion-label>
+    <ion-input [(ngModel)]="deliveryInstructions" type="text"></ion-input>
+  </ion-item>
+
+  <!-- Bill Details -->
+  <ion-item>
+    <ion-label>Bill Details</ion-label>
+  </ion-item>
+
+  <!-- Item Total -->
+  <ion-item>
+    <ion-label>Item Total</ion-label>
+    <ion-label slot="end">${{ calculateTotalWithoutDelivery() }}</ion-label>
+  </ion-item>
+
+  <!-- Delivery Fee -->
+  <ion-item>
+    <ion-label>Delivery Fee</ion-label>
+    <ion-label slot="end">$50</ion-label>
+  </ion-item>
+
+  <!-- Total -->
+  <ion-item lines="none">
+    <ion-label><strong>Total</strong></ion-label>
+    <ion-label slot="end"><strong>${{ calculateTotal() }}</strong></ion-label>
+  </ion-item>
+
+  <!-- Make Payment Button -->
+  <ion-button expand="full" (click)="makePayment()" color="primary">Make Payment</ion-button>
+  <div class="delivery-details">
+    <h2>Deliver to office</h2>
+    <div class="delivery-address">
+      <p>University of Pretoria, Informatorium</p>
+      <ion-button color="danger" fill="clear" class="change-button" size="small">
+        <ion-label>Change</ion-label>
+      </ion-button>
+    </div>
+  </div>
+  <!-- Navigation to Tabs -->
+<ion-footer>
+  <ion-toolbar>
+    <div class="tab-buttons-container">
+      <!-- Home Tab Button -->
+      <ion-tab-button tab="home" routerLink="/home" [routerLinkActive]="'active'">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+
+      <!-- Search Tab Button -->
+      <ion-tab-button tab="search" routerLink="/search" [routerLinkActive]="'active'">
+        <ion-icon name="search"></ion-icon>
+        <ion-label>Search</ion-label>
+      </ion-tab-button>
+
+      <!-- Cart Tab Button -->
+      <ion-tab-button tab="cart" routerLink="/cart" [routerLinkActive]="'active'">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Cart</ion-label>
+      </ion-tab-button>
+
+      <!-- Account Tab Button -->
+      <ion-tab-button tab="account" routerLink="/account" [routerLinkActive]="'active'">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Account</ion-label>
+      </ion-tab-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+</ion-content>

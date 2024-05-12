@@ -32,16 +32,14 @@
       </ion-col>
       <!-- Display restaurant information on the right -->
       <ion-col size="8">
-        <ion-card-header>
-          <ion-card-title>{{ restaurant.name }}</ion-card-title>
-          <ion-card-subtitle>{{ restaurant.type }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <p>Ratings: {{ restaurant.ratings }}</p>
-          <p>Distance: {{ restaurant.distance }}</p>
-          <p>Price: {{ restaurant.price }}</p>
-          <p>Top Dish: {{ restaurant.topDish }}</p>
-        </ion-card-content>
+        <!-- Restaurant Name -->
+        <h2>{{ restaurant.name }}</h2>
+        <!-- Restaurant Type -->
+        <p>{{ restaurant.type }}</p>
+        <!-- Restaurant Ratings with Stars --><!-- Restaurant Price -->
+        <p>{{ restaurant.ratings }} <ion-icon name="star"></ion-icon> {{ restaurant.price }}</p>
+        <!-- Restaurant Distance -->
+        <p>{{ restaurant.distance }}</p>
       </ion-col>
     </ion-row>
   </ion-card>

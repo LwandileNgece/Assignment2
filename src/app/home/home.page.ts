@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -9,14 +11,15 @@ export class HomePage {
   restaurants: any[]; // Define an array to store restaurant data
 
   constructor() {
+    
     // Initialize restaurant data (you can fetch it from an API or hardcode it)
     this.restaurants = [
       {
         name: 'Pizza Hut',
         type: 'Italian Cuisine',
         ratings: 4.2,
-        distance: '0.5 miles',
-        price: '$$',
+        distance: '3 kms away from you',
+        price: 150,
         topDish: 'Supreme Pizza',
         imagePath: 'assets/pizza_hut.jpg'
       },
@@ -24,8 +27,8 @@ export class HomePage {
         name: 'McDonald\'s',
         type: 'Fast Food',
         ratings: 3.9,
-        distance: '0.3 miles',
-        price: '$',
+        distance: '8 kms away from you',
+        price: 180,
         topDish: 'Big Mac',
         imagePath: 'assets/mcdonalds.png'
       },
@@ -33,21 +36,22 @@ export class HomePage {
         name: 'Subway',
         type: 'Sandwiches',
         ratings: 4.1,
-        distance: '0.7 miles',
-        price: '$',
+        distance: '10 kms away from you',
+        price: 70,
         topDish: 'Italian BMT',
         imagePath: 'assets/subway.jpg'
       },
       {
         name: 'Nandos',
-        type: 'Japanese Cuisine',
+        type: 'Portuguese Style Chicken',
         ratings: 4.5,
-        distance: '0.8 miles',
-        price: '$$$',
-        topDish: 'Sashimi Platter',
+        distance: '2 kms away from you',
+        price: 155,
+        topDish: 'Ayoba Meal',
         imagePath: 'assets/nandos.jpg'
       }
     ];
+    localStorage.setItem('restaurants', JSON.stringify(this.restaurants));
   }
 
   addToCart(restaurant: any) {

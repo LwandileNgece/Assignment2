@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Search
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Search input with clear button -->
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="search()" (ionClear)="clearSearch()" placeholder="Search for restaurants"></ion-searchbar>
+
+  <!-- Display filtered search results -->
+  <ion-list>
+    <ion-card *ngFor="let restaurant of filteredRestaurants" (click)="addToCart(restaurant)">
+      <ion-row>
+        <!-- Display image on the left -->
+        <ion-col size="4">
+          <ion-img [src]="restaurant.imagePath" class="restaurant-image"></ion-img>
+        </ion-col>
+        <!-- Display restaurant information on the right -->
+        <ion-col size="8">
+          <!-- Restaurant Name -->
+          <h2>{{ restaurant.name }}</h2>
+          <!-- Restaurant Type -->
+          <p>{{ restaurant.type }}</p>
+          <!-- Restaurant Ratings with Stars --><!-- Restaurant Price -->
+          <p>{{ restaurant.ratings }} <ion-icon name="star"></ion-icon> {{ restaurant.price }}</p>
+          <!-- Restaurant Distance -->
+          <p>{{ restaurant.distance }}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tab-buttons-container">
+      <!-- Home Tab Button -->
+      <ion-tab-button tab="home" routerLink="/home">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+
+      <!-- Search Tab Button with active style -->
+      <ion-tab-button tab="search" routerLink="/search" class="active-tab">
+        <ion-icon name="search"></ion-icon>
+        <ion-label>Search</ion-label>
+      </ion-tab-button>
+
+      <!-- Cart Tab Button -->
+      <ion-tab-button tab="cart" routerLink="/cart">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Cart</ion-label>
+      </ion-tab-button>
+
+      <!-- Account Tab Button -->
+      <ion-tab-button tab="account" routerLink="/account">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Account</ion-label>
+      </ion-tab-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
