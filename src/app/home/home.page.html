@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,67 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- Display the image covering the screen horizontally -->
+  <div class="image-container">
+    <img src="assets/main2.jpg" alt="Main Image">
   </div>
+
+  <!-- Heading and text below the image -->
+  <ion-row>
+    <ion-col>
+      <h1>Restaurants Nearby</h1>
+      <p>Discover unique tastes near you</p>
+    </ion-col>
+  </ion-row>
+  <ion-card *ngFor="let restaurant of restaurants" (click)="addToCart(restaurant)" class="restaurant-card">
+    <ion-row>
+      <!-- Display image on the left -->
+      <ion-col size="4">
+        <ion-img [src]="restaurant.imagePath" class="restaurant-image"></ion-img>
+      </ion-col>
+      <!-- Display restaurant information on the right -->
+      <ion-col size="8">
+        <ion-card-header>
+          <ion-card-title>{{ restaurant.name }}</ion-card-title>
+          <ion-card-subtitle>{{ restaurant.type }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Ratings: {{ restaurant.ratings }}</p>
+          <p>Distance: {{ restaurant.distance }}</p>
+          <p>Price: {{ restaurant.price }}</p>
+          <p>Top Dish: {{ restaurant.topDish }}</p>
+        </ion-card-content>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <!-- Navigation to Tabs -->
+  <ion-footer>
+    <ion-toolbar>
+      <div class="tab-buttons-container">
+        <!-- Home Tab Button -->
+        <ion-tab-button tab="home" routerLink="/home" [routerLinkActive]="'active'">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+  
+        <!-- Other Tab Buttons -->
+        <ion-tab-button tab="search" routerLink="/search" [routerLinkActive]="'active'">
+          <ion-icon name="search"></ion-icon>
+          <ion-label>Search</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="cart" routerLink="/cart" [routerLinkActive]="'active'">
+          <ion-icon name="cart"></ion-icon>
+          <ion-label>Cart</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="account" routerLink="/account" [routerLinkActive]="'active'">
+          <ion-icon name="person"></ion-icon>
+          <ion-label>Account</ion-label>
+        </ion-tab-button>
+      </div>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>
