@@ -27,6 +27,14 @@ export class AccountPage {
   ionViewWillEnter() {
     this.loadPastOrders();
     this.loadTotalAmounts();
+    this.loadCustomerDetails(); // Load customer details
+  }
+
+  loadCustomerDetails() {
+    const storedCustomer = localStorage.getItem('customer');
+    if (storedCustomer) {
+      this.customer = JSON.parse(storedCustomer);
+    }
   }
 
   loadPastOrders() {
@@ -49,8 +57,10 @@ export class AccountPage {
   }
 
   saveCustomerDetails() {
-    // Save customer details to localStorage or perform any other actions needed
-    // For demonstration purposes, let's just toggle editing mode
+    // Save customer details to localStorage
+    localStorage.setItem('customer', JSON.stringify(this.customer));
+
+    // Toggle editing mode
     this.isEditing = !this.isEditing;
   }
 
